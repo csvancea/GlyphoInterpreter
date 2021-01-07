@@ -24,6 +24,10 @@ public class Decoder {
     private void decode() throws SyntaxException {
         Stack<Integer> braces = new Stack<>();
 
+        if (glyphs.length() % GLYPHS_GROUP_LENGTH != 0) {
+            throw new SyntaxException("Invalid glyphs string length", glyphs.length() / GLYPHS_GROUP_LENGTH);
+        }
+
         while (currentGlyphsGroupIndex < glyphs.length()) {
             int jumpToInstruction = -1;
             int currentInstruction = getCurrentInstructionIndex();
@@ -50,7 +54,7 @@ public class Decoder {
         }
 
         if (!braces.isEmpty()) {
-            throw new SyntaxException("LBRACE with no match", braces.peek());
+            throw new SyntaxException("LBRACE with no match", getCurrentInstructionIndex());
         }
     }
 
@@ -59,10 +63,6 @@ public class Decoder {
     }
 
     private String readCurrentGlyphsGroup() throws SyntaxException {
-        if (glyphs.length() - currentGlyphsGroupIndex < GLYPHS_GROUP_LENGTH) {
-            throw new SyntaxException("Invalid instruction length", getCurrentInstructionIndex());
-        }
-
         return glyphs.substring(currentGlyphsGroupIndex, currentGlyphsGroupIndex + GLYPHS_GROUP_LENGTH);
     }
 

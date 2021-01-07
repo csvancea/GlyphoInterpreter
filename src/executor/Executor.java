@@ -28,7 +28,14 @@ public class Executor {
     private void run() throws RuntimeException {
         while (instructionPointer < instructionList.size()) {
             Instruction instruction = instructionList.get(instructionPointer);
-            executeSingleInstruction(instruction, false);
+
+            try {
+                executeSingleInstruction(instruction, false);
+            } catch (InputMismatchException e) {
+                throw new RuntimeException("Can't parse input number", instructionPointer);
+            } catch (NoSuchElementException e) {
+                throw new RuntimeException("Not enough stack elements", instructionPointer);
+            }
         }
     }
 

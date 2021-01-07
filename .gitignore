@@ -166,3 +166,4 @@ checker/logs/
 *.out
 *.err
 code
+interpreter
