@@ -1,9 +1,9 @@
-package decoder;
+package executor;
 
-public class SyntaxException extends Exception {
+public class RuntimeException extends Exception {
     private final int instructionIndex;
 
-    public SyntaxException(String message, int instructionIndex) {
+    public RuntimeException(String message, int instructionIndex) {
         super(message);
         this.instructionIndex = instructionIndex;
     }

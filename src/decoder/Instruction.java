@@ -2,7 +2,7 @@ package decoder;
 
 public class Instruction {
     private final Opcodes opcode;
-    private final int param; // atm used only by the RBRACE opcode (points to the corresponding LBRACE)
+    private int param; // atm used only by the BRACE opcodes (points to the next instruction that has to be executed)
 
     public Instruction(Opcodes opcode) {
         this(opcode, -1);
@@ -17,8 +17,11 @@ public class Instruction {
         return opcode;
     }
 
+    public void setJumpToIndex(int index) {
+        this.param = index;
+    }
+
     public int getJumpToIndex() {
-        assert(opcode == Opcodes.RBRACE);
         return param;
     }
 }
