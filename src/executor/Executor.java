@@ -76,7 +76,7 @@ public class Executor {
                 }
                 break;
             case OUTPUT:
-                System.out.println(cpuStack.pop().toString(radix));
+                System.out.println(cpuStack.pop().toString(radix).toUpperCase());
                 break;
             case MULTIPLY:
                 cpuStack.push(cpuStack.pop().multiply(cpuStack.pop()));
